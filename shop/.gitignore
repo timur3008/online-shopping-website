@@ -2,6 +2,7 @@
 venv/
 .venv/
 images/
+media/
 __pychache/
 vscode/
 .vscode/
