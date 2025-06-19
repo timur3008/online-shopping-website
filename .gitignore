@@ -3,7 +3,7 @@ venv/
 .venv/
 images/
 media/
-__pychache/
+__pycache/
 vscode/
 .vscode/
 .env/
