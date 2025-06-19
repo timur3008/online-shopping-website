@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{% endblock title %}
+
+{% block content %}
+
+{% include 'components/_social_media.html' %}
+{% include 'components/_catalog.html' %}
+{% include 'components/_slider.html' %}
+<!-- {% include 'components/_categories.html' %} -->
+
+<section class="container container__popular">
+    <p class="text__title text-center">Популярные товары</p>
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        {% for product in products %}
+        {% include 'components/_product_cart.html' %}
+        {% endfor %}
+    </div>
+    {% include 'components/_paginator.html' %}
+</section>
+
+{% include 'components/_info.html' %}
+{% include 'components/_brands.html' %}
+
+{% endblock content %}

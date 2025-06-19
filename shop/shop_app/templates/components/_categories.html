@@ -1,0 +1,14 @@
+{% load static %}
+<section class="container container__category">
+    <p class="text__title text-center">Наш ассортимент</p>
+
+    <div class="category__items">
+        {% for category in categories %}
+        <div class="category__item">
+            <img src="{{ category.image.url }}" alt="{{ category.title }}"
+                class="category__item_image">
+            <a href="?category={{ category.slug }}" class="category__item_link">{{ category.title }}</a>
+        </div>
+        {% endfor %}
+    </div>
+</section>

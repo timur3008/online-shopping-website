@@ -1,0 +1,17 @@
+{% load static %}
+<section class="container social__media_main_block" style="height: 58px;">
+    <div class="block__social_media d-flex">
+        <a href class="social__media_link">
+            <img src="{% static 'images/whatsapp.png' %}" alt class="social__media_logo">
+        </a>
+        <a href class="social__media_link">
+            <img src="{% static 'images/telegram.png' %}" alt
+                class="social__media_logo">
+        </a>
+    </div>
+    <a href="{% url 'home_path' %}" class="logo__text mb-0 text-decoration-none">GreaTime</a>
+    <div class="block__company_details">
+        <a href class="company__details_link">О компании</a>
+        <a href class="company__details_link">Контакты</a>
+    </div>
+</section>

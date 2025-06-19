@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}
+Авторизация
+{% endblock title %}
+
+{% block content %}
+<form method='post' class='my-4'>
+    {% csrf_token %}
+    {{ form.as_p }} 
+
+    <button type="submit" class="btn btn-primary">Войти</button>
+    <a href="{% url 'registration_path' %}" class="btn btn-primary">Зарегистроваться</a>
+</form>
+{% endblock content %}

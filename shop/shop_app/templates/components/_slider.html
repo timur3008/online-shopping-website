@@ -1,0 +1,21 @@
+{% load static %}
+<section class="container container__slider">
+    <img src="{% static 'images/slider.png' %}" alt class="slider__image">
+    <div class="slider__paginators">
+        <div class="slider__paginator slider__paginator_active"></div>
+        <div class="slider__paginator"></div>
+        <div class="slider__paginator"></div>
+        <div class="slider__paginator"></div>
+        <div class="slider__paginator"></div>
+    </div>
+    <div class="slider__buttons">
+        <button class="slider__button">
+            <img src="{% static 'images/arrows/short_right.png' %}" alt width="21"
+                height="16">
+        </button>
+        <button class="slider__button">
+            <img src="{% static 'images/arrows/short_left.png' %}" alt width="21"
+                height="16">
+        </button>
+    </div>
+</section>

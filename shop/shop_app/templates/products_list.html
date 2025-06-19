@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{% endblock title %}
+
+{% block content %}
+
+{% include 'components/_social_media.html' %}
+{% include 'components/_catalog.html' %}
+
+<div class="container my-5">
+    <div class="row">
+        <!-- Сайдбар -->
+        <nav class="col-md-3 col-lg-3 d-md-block bg-light p-3 border-end shadow-sm">
+            <h5 class="mb-4 text-center">Фильтрация</h5>
+            <div class="list-group">
+                {% for category in categories %}
+                <a href="?category={{ category.slug }}" class="list-group-item list-group-item-action text-center{% if category.slug == category_query %} active{% endif %}">{{ category.title }}</a>
+                {% endfor %}
+            </div>
+        </nav>
+
+        <!-- Контент -->
+        <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
+            <!-- Товары -->
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for product in products %}
+                {% include 'components/_product_cart.html' %}
+                {% endfor %}
+            </div>
+
+            {% include 'components/_paginator.html' %}
+        </main>
+    </div>
+</div>
+
+{% endblock content %}

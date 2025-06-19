@@ -1,0 +1,9 @@
+.idea/
+venv/
+.venv/
+images/
+__pychache/
+vscode/
+.vscode/
+.env/
+db.sqlite3

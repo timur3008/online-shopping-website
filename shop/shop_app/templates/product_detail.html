@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% endblock title %}
+
+{% block content %}
+{% include 'components/_social_media.html' %}
+{% include 'components/_catalog.html' %}
+
+<div class="container py-4">
+    <div class="row">
+        <!-- Изображение -->
+        <div class="col-md-6 text-center">
+            <div
+                style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
+                class="swiper mySwiper2">
+                <div class="swiper-wrapper">
+                    {% for gallery in product.gallery.all %}
+                    <div class="swiper-slide">
+                        <img src="{{ gallery.image.url }}" />
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+            <div thumbsSlider class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    {% for gallery in product.gallery.all %}
+                    <div class="swiper-slide">
+                        <img src="{{ gallery.image.url }}" />
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- Информация о товаре -->
+        <div class="col-md-6">
+            <h3 class="mt-2">{{ product.name }}</h3>
+            <div class="mb-2">Наличие: <span
+                    class="text-success fw-semibold">{{ product.amount }}</span></div>
+            <div class="mb-5">Цена: <span class="fw-semibold">{{ product.price }} сум</span></div>
+
+            <!-- Кнопки -->
+            <div class="d-flex flex-wrap gap-2 mb-4 mt-5">
+                <a class="btn btn-primary" href="{% url 'update_cart_path' product.pk 'add' 1 %}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                        height="16" fill="currentColor"
+                        class="bi bi-cart-plus me-2"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z" />
+                        <path
+                            d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                    </svg>
+                    Добавить в корзину</a>
+                <a href="{% url 'activate_favorite' product.pk %}" class="btn btn-outline-secondary btn-sm">
+                    {% if product.pk in favorite_products %}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#4174CB" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314" />
+                    </svg>
+                    {% else %}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#4174CB" class="bi bi-heart" viewBox="0 0 16 16">
+                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                    </svg>
+                    {% endif %}
+                </a>
+            </div>
+
+            <!-- Вкладки -->
+            <ul class="nav nav-tabs mb-2" id="tabContent"
+                role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active"
+                        id="characteristics-tab" data-bs-toggle="tab"
+                        data-bs-target="#characteristics" type="button"
+                        role="tab">Характеристики</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="reviews-tab"
+                        data-bs-toggle="tab" data-bs-target="#reviews"
+                        type="button" role="tab">Отзывы</button>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="characteristics"
+                    role="tabpanel">
+                    <p>{{ product.description }}</p>
+                </div>
+                <div class="tab-pane fade" id="reviews" role="tabpanel">
+                    <p>Здесь будут отзывы о товаре.</p>
+                    <div class="tab-pane fade show" id="tab2">
+                        <div class="mb-4">
+                            <!-- Отзыв -->
+                            {% for comment in product.comments.all %}
+                            <div class="border rounded p-3 mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <strong>{{ comment.author }}</strong>
+                                </div>
+                                <small class="text-muted">{{ comment.created_at }}</small>
+                                <p class="mb-0 mt-2">{{ comment.text }}</p>
+                            </div>
+                            {% endfor %}
+                            
+                            {% if request.user.is_authenticated %}
+                            <form class="p-3 border rounded bg-light" method="post">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    {% for field in comment_form %}
+                                    <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                                    {{ field }}
+                                    {% endfor %}
+                                </div>
+                                <button type="submit" class="btn btn-primary">Отправить</button>
+                            </form>
+                            {% else %}
+                            <p class="text text-danger">Вам нужно зарегистрироваться/авторизоваться чтобы оставить комментарий!!!</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

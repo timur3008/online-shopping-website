@@ -1,0 +1,40 @@
+{% load static %}
+<section class="container catalog__block_main">
+    <a href="{% url 'products_list_path' %}" class="catalog">
+        <img src="{% static 'images/catalog.png' %}" alt class="catalog__logo">
+        Каталог
+    </a>
+    <form action="{% url 'search' %}" class="catalog__form">
+        <input type="text" class="catalog__form_input" placeholder="Найти любимые товары" name="query">
+        <button class="catalog__form_button">Найти</button>
+    </form>
+    <div class="catalog__links">
+        {% if not request.user.is_authenticated %}
+        <a href="{% url 'authorization_path' %}" class="catalog__link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#4174CB" class="bi bi-person-add" viewBox="0 0 16 16">
+                <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/>
+                <path d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z"/>
+            </svg>
+            Войти
+        </a>
+        {% else %}
+        <a href="{% url 'logout_path' %}" class="catalog__link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#4174CB" class="bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+            </svg>
+            Выйти
+        </a>
+        <a href="{% url 'wishlist_path' %}" class="catalog__link">
+            <img src="{% static 'images/Heart.png' %}" alt class="catalog__link_image"
+                style="width: 26.67px; height: 25.33px;">
+            Избранное
+        </a>
+        <a href="{% url 'cart_path' %}" class="catalog__link">
+            <img src="{% static 'images/Buy.png' %}" alt class="catalog__link_image"
+                style="width: 26.67px; height: 26.13px;">
+            Корзина
+        </a>
+        {% endif %}
+    </div>
+</section>

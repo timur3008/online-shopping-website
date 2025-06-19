@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{% endblock title %}
+
+{% block content %}
+
+{% include 'components/_social_media.html' %}
+{% include 'components/_catalog.html' %}
+
+<div class="container my-5">
+    <!-- Товары -->
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        {% for item in products %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">  
+                <img src="{{ item.product.preview.url }}"
+                    class="card-img-top" alt="{{ item.product.name }}">
+                <div class="card-body d-flex flex-column">
+                    <a href="{% url 'product_path' item.product.pk %}" class="card-title">{{ item.product.name }}</a>
+                    <p class="text-primary fw-bold mt-auto">{{ item.product.price }} сум</p>
+                    <div class="d-flex justify-content-between mt-2">
+                        <a href="{% url 'update_cart_path' item.product.pk 'add' 1 %}"
+                            class="btn btn-outline-primary btn-sm d-flex align-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                width="16" height="16"
+                                fill="currentColor"
+                                class="bi bi-cart-plus me-2"
+                                viewBox="0 0 16 16">
+                                <path
+                                    d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z" />
+                                <path
+                                    d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                            </svg>
+                            В корзину</a>
+                        <a href="{% url 'activate_favorite' item.product.pk %}"
+                            class="btn btn-outline-secondary btn-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                width="16" height="16"
+                                fill="#4174CB"
+                                class="bi bi-heart-fill"
+                                viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% include 'components/_paginator.html' %}
+</div>
+
+{% endblock content %}

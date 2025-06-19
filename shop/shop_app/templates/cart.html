@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% endblock title %}
+
+{% block content %}
+{% include 'components/_social_media.html' %}
+{% include 'components/_catalog.html' %}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Ваша корзина</h2>
+
+    <div class="row fw-bold mb-3 border-bottom pb-2">
+        <div class="col-2">Фото</div>
+        <div class="col-4">Наименование товара</div>
+        <div class="col-2">Цена за ед.</div>
+        <div class="col-2">кол-во</div>
+        <div class="col-1"></div>
+    </div>
+
+    <!-- Товар -->
+    <section class="container my-5">
+        {% for item in cart_products %}
+        {% include 'components/_cart_item.html' %}
+        {% endfor %}
+    </section>
+
+    <p class="text text-info">
+        Общее кол-во продуктов:
+        <span class="text text-success fw-bold">{{ cart.get_cart_total_quantity }} шт.</span>
+    </p>
+    <p class="text text-info">
+        Общая сумма продуктов:
+        <span class="text text-success fw-bold">{{ cart.get_cart_total_price }} сум</span>
+    </p>
+</div>
+{% endblock content %}

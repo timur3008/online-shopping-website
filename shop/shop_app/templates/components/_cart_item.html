@@ -1,0 +1,29 @@
+{% load static %}
+<div class="row product-row">
+    <div class="col-2">
+        <img src="{{ item.product.preview.url }}"
+            class="img-fluid product-img" alt="Товар">
+    </div>
+    <div class="col-4">
+        <div>
+            <p class="text-primary text-decoration-none">{{ item.product.name }}</p>
+        </div>
+    </div>
+    <div class="col-2">{{ item.product.price }} сум</div>
+    <div class="col-2 qty-box">
+        <a href="{% url 'update_cart_path' item.product.pk 'delete' 1 %}" class="btn btn-outline-secondary btn-sm">−</a>
+        <input type="text" class="form-control mx-2" value="{{ item.quantity }}"
+            readonly>
+        <a href="{% url 'update_cart_path' item.product.pk 'add' 1 %}" class="btn btn-outline-secondary btn-sm">+</a>
+    </div>
+    <div class="col-1">
+        <a href="{% url 'update_cart_path' item.product.pk 'clear' 1 %}" class="remove-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                height="16" fill="currentColor"
+                class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                <path
+                    d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
+            </svg>
+        </a>
+    </div>
+</div>
