@@ -1,13 +1,16 @@
 {% load static %}
 <section class="container container__slider">
-    <img src="{% static 'images/slider.png' %}" alt class="slider__image">
+    {% if not slides %}
+    <img src="{% static 'images/default_slide.jpg' %}" alt="..." class="slider__image slider__image_active">
+    {% else %}
+    {% for slide in slides %}
+    <img src="{{ slide.image.url }}" alt="{{ slide.title }}" class="slider__image{% if forloop.counter == 1 %} slider__image_active{% endif %}">
+    {% endfor %}
+
     <div class="slider__paginators">
-        <div class="slider__paginator slider__paginator_active"></div>
-        <div class="slider__paginator"></div>
-        <div class="slider__paginator"></div>
-        <div class="slider__paginator"></div>
-        <div class="slider__paginator"></div>
-    </div>
+        {% for slide in slides %}
+        <div class="slider__paginator{% if forloop.counter == 1 %} slider__paginator_active{% endif %}"></div>
+        {% endfor %}
     <div class="slider__buttons">
         <button class="slider__button">
             <img src="{% static 'images/arrows/short_right.png' %}" alt width="21"
@@ -18,4 +21,5 @@
                 height="16">
         </button>
     </div>
+    {% endif %}
 </section>

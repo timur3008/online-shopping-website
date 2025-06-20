@@ -2,6 +2,8 @@ from . import models
 
 from django.contrib import admin
 
+admin.site.register(models.Slider)
+
 # Register your models here.
 @admin.register(models.Category)
 class CategoryAdmin(admin.ModelAdmin):

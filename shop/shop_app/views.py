@@ -13,6 +13,7 @@ from django.core.paginator import Paginator
 def render_home_page(request: HttpRequest):
     categories = models.Category.objects.all()
     products = models.Product.objects.all()
+    slides = models.Slider.objects.all()
     page = request.GET.get('page')
 
     paginator = Paginator(products, 4)
@@ -27,6 +28,7 @@ def render_home_page(request: HttpRequest):
     context = {
         'categories': categories,
         'products': products,
+        'slides': slides,
         'favorite_products': favorite_products
     }
 

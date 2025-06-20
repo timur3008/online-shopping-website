@@ -5,9 +5,12 @@
     <div class="category__items">
         {% for category in categories %}
         <div class="category__item">
-            <img src="{{ category.image.url }}" alt="{{ category.title }}"
-                class="category__item_image">
-            <a href="?category={{ category.slug }}" class="category__item_link">{{ category.title }}</a>
+            {% if category.image %}
+            <img src="{{ category.image.url }}" alt="{{ category.title }}" class="category__item_image">
+            {% else %}
+            <img src="{% static 'images/coming_soon_photo.jpg' %}" alt="..." class="category__item_image">
+            {% endif %}
+            <a href="products/?category={{ category.slug }}" class="category__item_link">{{ category.title }}</a>
         </div>
         {% endfor %}
     </div>

@@ -2,6 +2,17 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+class Slider(models.Model):
+    title = models.CharField(max_length=50, verbose_name='Название слайда')
+    image = models.ImageField(upload_to='sliders/', verbose_name='Картина слайда')
+
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        verbose_name = 'Слайд'
+        verbose_name_plural = 'Слайды'
+
 class Category(models.Model):
     title = models.CharField(max_length=50, verbose_name='Название категории')
     slug = models.SlugField(verbose_name='Слаг')
