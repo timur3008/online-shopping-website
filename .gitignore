@@ -1,7 +1,6 @@
 .idea/
 venv/
 .venv/
-images/
 media/
 __pycache/
 vscode/
